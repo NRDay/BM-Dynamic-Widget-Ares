@@ -72,7 +72,7 @@ class Bm_Dynamic_Widget_Areas {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'bm-dynamic-widget-areas';
+		$this->plugin_name = 'bm_dynamic_widget_areas';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -157,6 +157,17 @@ class Bm_Dynamic_Widget_Areas {
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
+		/**
+		 * Plugin Setting Page		
+		*/
+		$this->loader->add_action( 'admin_menu', $plugin_admin, 'add_options_page' );
+		$this->loader->add_action( 'admin_init', $plugin_admin, 'register_setting' );
+
+		/**
+		 * Register New Sidbars	
+		*/
+		$this->loader->add_action( 'widgets_init', $plugin_admin, 'bm_dynamic_widget_areas_register_areas' );
+
 	}
 
 	/**
@@ -170,8 +181,8 @@ class Bm_Dynamic_Widget_Areas {
 
 		$plugin_public = new Bm_Dynamic_Widget_Areas_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
+		//$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
+		//$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
 
 	}
 
